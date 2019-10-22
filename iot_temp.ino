@@ -33,6 +33,16 @@ struct Data
   String errMsg = "";
 };
 
+/*
+ * Send request to AWS API
+ * 
+ * @param method The HTTP method
+ * @param uri 
+ * @param query
+ * @param body
+ * 
+ * @return The HTTP response
+ */
 Response sendRequest(String method, String uri, String query, String body)
 {
   Serial.print("Connecting to ");
@@ -93,6 +103,12 @@ Response sendRequest(String method, String uri, String query, String body)
   return res;
 }
 
+/*
+ * Check if a string is numeric.
+ * 
+ * @param str The string to check
+ * @return True if the string is numeric, else false
+ */
 bool isNumeric(String str)
 {
     unsigned int stringLength = str.length();
@@ -230,6 +246,11 @@ void registerDevice()
   Serial.println("Device has successfully been registered");
 }
 
+/*
+ * Measure temerature and humidity from AM2320 sensor.
+ * 
+ * @return Data
+ */
 Data getData()
 {
   Data data;
