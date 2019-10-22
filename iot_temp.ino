@@ -33,15 +33,15 @@ struct Data
   String errMsg = "";
 };
 
-/*
- * Send request to AWS API
+/**
+ * Sends a request to an AWS API.
  * 
- * @param method The HTTP method
- * @param uri 
- * @param query
- * @param body
+ * @param method HTTP request method.
+ * @param uri URI.
+ * @param query Query string.
+ * @param body Raw request body.
  * 
- * @return The HTTP response
+ * @return HTTP response.
  */
 Response sendRequest(String method, String uri, String query, String body)
 {
@@ -103,11 +103,11 @@ Response sendRequest(String method, String uri, String query, String body)
   return res;
 }
 
-/*
- * Check if a string is numeric.
+/**
+ * Checks if a string is numeric.
  * 
- * @param str The string to check
- * @return True if the string is numeric, else false
+ * @param str String to check.
+ * @return True if the string is numeric, else false.
  */
 bool isNumeric(String str)
 {
@@ -141,6 +141,11 @@ bool isNumeric(String str)
     return true;
 }
 
+/**
+ * Gets the device's update rate.
+ * 
+ * @return Device's update rate if the device exists, else -1
+ */
 int getUpdateRate()
 {
   Response r = sendRequest("GET", "/beta/device", "?macAddress=" + macAddress, "");
@@ -160,6 +165,9 @@ int getUpdateRate()
   return r.body.substring(updateRateStart, updateRateEnd).toInt();
 }
 
+/**
+ * Registers a device.
+ */
 void registerDevice()
 {
   Serial.println();
@@ -247,7 +255,7 @@ void registerDevice()
 }
 
 /*
- * Measure temerature and humidity from AM2320 sensor.
+ * Measures temerature and humidity from AM2320 sensor.
  * 
  * @return Data
  */
