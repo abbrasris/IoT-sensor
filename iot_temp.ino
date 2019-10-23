@@ -172,7 +172,7 @@ int getUpdateRate() // TODO: validate output
  */
 void registerDevice()
 {
-  Serial.println();
+  // Serial.println();
   Serial.println("Registering new device...");
   
   Serial.println();
@@ -240,7 +240,6 @@ void registerDevice()
     }
 
     String body = "{\"macAddress\": \"" + macAddress + "\", \"owner\": \"" + owner + "\", \"location\": \"" + location + "\", \"updateRate\": \"" + updateRate + "\", \"password\": \"" + token + "\"}";
-    Serial.println(body);
     
     Response r = sendRequest("POST", "/beta/device", "", body);
 
