@@ -21,8 +21,10 @@ struct Response
 
 String owner;
 String location;
-String updateRate;
+String updateRateInput;
 String token;
+
+int updateRate;
 
 AM2320 sensor;
 
@@ -146,7 +148,7 @@ bool isNumeric(String str)
  * 
  * @return Device's update rate if the device exists, else -1
  */
-int getUpdateRate()
+int getUpdateRate() // TODO: validate output
 {
   Response r = sendRequest("GET", "/beta/device", "?macAddress=" + macAddress, "");
   
@@ -157,7 +159,7 @@ int getUpdateRate()
     return -1;
   }
 
-  int updateRateIndex = r.body.indexOf("\"updateRate\":");
+  int updateRateIndex = r.body.indexOf("\"update_rate\":");
   
   int updateRateStart = updateRateIndex + 15;
   int updateRateEnd = r.body.indexOf("\"", updateRateStart);
@@ -200,23 +202,23 @@ void registerDevice()
   Serial.println();
   Serial.println("Please enter the amount of ms between each update:");
 
-  while (updateRate.length() == 0)
+  while (updateRateInput.length() == 0)
   {
     if (Serial.available())
     {
-      updateRate = Serial.readString();
-      updateRate.trim();
+      updateRateInput = Serial.readString();
+      updateRateInput.trim();
 
       // Check if user didn't enter a numeric value
-      if (!isNumeric(updateRate))
+      if (!isNumeric(updateRateInput))
       {
         Serial.println("ERR: Value must be numeric.");
-        updateRate = "";
+        updateRateInput = "";
         
         continue;
       }
 
-      updateRate.toInt();
+      updateRate = updateRateInput.toInt();
       Serial.println(updateRate);
     }
   }
