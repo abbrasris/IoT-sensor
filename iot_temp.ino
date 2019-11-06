@@ -253,6 +253,7 @@ void registerDevice()
     break;
   }
   Serial.println("Device has successfully been registered");
+  Serial.println();
 }
 
 /*
